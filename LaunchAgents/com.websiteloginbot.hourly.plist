@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Label: Unique identifier for this LaunchAgent -->
+    <key>Label</key>
+    <string>com.websiteloginbot.hourly</string>
+    
+    <!-- Program: Path to the worker executable -->
+    <key>Program</key>
+    <string>/Applications/WebsiteLoginBot.app/Contents/MacOS/LoginWorker</string>
+    
+    <!-- Arguments: No additional arguments for hourly runs -->
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Applications/WebsiteLoginBot.app/Contents/MacOS/LoginWorker</string>
+    </array>
+    
+    <!-- Schedule: Run at the top of every hour (minute 0) -->
+    <!-- Omitting Hour key makes it run every hour at minute 0 -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+    
+    <!-- Logging: Redirect output to log files -->
+    <key>StandardOutPath</key>
+    <string>~/Library/Logs/WebsiteLoginBot/hourly.log</string>
+    <key>StandardErrorPath</key>
+    <string>~/Library/Logs/WebsiteLoginBot/hourly-error.log</string>
+    
+    <!-- Run only when user is logged in -->
+    <key>RunAtLoad</key>
+    <false/>
+    
+    <!-- Working Directory -->
+    <key>WorkingDirectory</key>
+    <string>/tmp</string>
+    
+    <!-- Environment Variables (optional) -->
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+    
+    <!-- Process Settings -->
+    <key>ProcessType</key>
+    <string>Background</string>
+    
+    <!-- Exit Timeout: Give the process time to complete -->
+    <key>ExitTimeOut</key>
+    <integer>120</integer>
+    
+    <!-- Throttle: Minimum interval between job invocations (in seconds) -->
+    <key>ThrottleInterval</key>
+    <integer>60</integer>
+</dict>
+</plist>

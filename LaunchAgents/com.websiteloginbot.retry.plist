@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Label: Unique identifier for this LaunchAgent -->
+    <key>Label</key>
+    <string>com.websiteloginbot.retry</string>
+    
+    <!-- Program: Path to the worker executable -->
+    <key>Program</key>
+    <string>/Applications/WebsiteLoginBot.app/Contents/MacOS/LoginWorker</string>
+    
+    <!-- Arguments: No additional arguments -->
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Applications/WebsiteLoginBot.app/Contents/MacOS/LoginWorker</string>
+    </array>
+    
+    <!-- Schedule: Run every 15 minutes (900 seconds) -->
+    <!-- This handles retry attempts when login fails -->
+    <key>StartInterval</key>
+    <integer>900</integer>
+    
+    <!-- Logging: Redirect output to separate retry log -->
+    <key>StandardOutPath</key>
+    <string>~/Library/Logs/WebsiteLoginBot/retry.log</string>
+    <key>StandardErrorPath</key>
+    <string>~/Library/Logs/WebsiteLoginBot/retry-error.log</string>
+    
+    <!-- Do not run immediately on load -->
+    <key>RunAtLoad</key>
+    <false/>
+    
+    <!-- Working Directory -->
+    <key>WorkingDirectory</key>
+    <string>/tmp</string>
+    
+    <!-- Environment Variables (optional) -->
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+    
+    <!-- Process Settings -->
+    <key>ProcessType</key>
+    <string>Background</string>
+    
+    <!-- Exit Timeout -->
+    <key>ExitTimeOut</key>
+    <integer>120</integer>
+    
+    <!-- Throttle: Minimum interval between job invocations -->
+    <key>ThrottleInterval</key>
+    <integer>60</integer>
+</dict>
+</plist>
