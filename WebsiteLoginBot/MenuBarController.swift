@@ -108,10 +108,10 @@ class MenuBarController: NSObject {
     
     /// Shows the configuration dialog
     @objc func showConfiguration() {
-        let alert = NSAlert()
-        alert.messageText = "Configure Website Login"
-        alert.informativeText = "Enter the website URL and your credentials. These will be stored securely in your Keychain."
-        alert.alertStyle = .informational
+        let configurationAlert = NSAlert()
+        configurationAlert.messageText = "Configure Website Login"
+        configurationAlert.informativeText = "Enter the website URL and your credentials. These will be stored securely in your Keychain."
+        configurationAlert.alertStyle = .informational
         
         // Create input fields
         let stackView = NSStackView(frame: NSRect(x: 0, y: 0, width: 400, height: 120))
@@ -147,12 +147,12 @@ class MenuBarController: NSObject {
         stackView.addArrangedSubview(passwordLabel)
         stackView.addArrangedSubview(passwordField)
         
-        alert.accessoryView = stackView
-        alert.addButton(withTitle: "Save")
-        alert.addButton(withTitle: "Cancel")
+        configurationAlert.accessoryView = stackView
+        configurationAlert.addButton(withTitle: "Save")
+        configurationAlert.addButton(withTitle: "Cancel")
         
         // Show alert
-        let response = alert.runModal()
+        let response = configurationAlert.runModal()
         
         if response == .alertFirstButtonReturn {
             // Save configuration
@@ -168,24 +168,24 @@ class MenuBarController: NSObject {
                 do {
                     try keychainManager.storeCredentials(username: username, password: password)
                     
-                    let success = NSAlert()
-                    success.messageText = "Configuration Saved"
-                    success.informativeText = "Your settings have been saved securely."
-                    success.alertStyle = .informational
-                    success.runModal()
+                    let successAlert = NSAlert()
+                    successAlert.messageText = "Configuration Saved"
+                    successAlert.informativeText = "Your settings have been saved securely."
+                    successAlert.alertStyle = .informational
+                    successAlert.runModal()
                 } catch {
-                    let error = NSAlert()
-                    error.messageText = "Failed to Save Credentials"
-                    error.informativeText = error.localizedDescription
-                    error.alertStyle = .critical
-                    error.runModal()
+                    let failureAlert = NSAlert()
+                    failureAlert.messageText = "Failed to Save Credentials"
+                    failureAlert.informativeText = error.localizedDescription
+                    failureAlert.alertStyle = .critical
+                    failureAlert.runModal()
                 }
             } else {
-                let error = NSAlert()
-                error.messageText = "Invalid Input"
-                error.informativeText = "Please fill in all fields."
-                error.alertStyle = .warning
-                error.runModal()
+                let validationAlert = NSAlert()
+                validationAlert.messageText = "Invalid Input"
+                validationAlert.informativeText = "Please fill in all fields."
+                validationAlert.alertStyle = .warning
+                validationAlert.runModal()
             }
         }
     }
